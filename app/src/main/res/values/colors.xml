@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#F70004</color>
+    <color name="red_shadow">#33E21221</color>
+    <color name="red_input_active_background">#fee9eb</color>
+    <color name="dark_shadow">#faedee</color>
+    <color name="text_color">#1e1e1e</color>
+    <color name="text_color_secondary">#434343</color>
+    <color name="stroke_color">#EFEFEF</color>
+    <color name="background">#ffffff</color>
+    <color name="color_input_back">#f9f9f9</color>
+    <color name="inactive_input">#949494</color>
+    <color name="dark">#181A20</color>
+    <color name="indicator_color">#e0e0e0</color>
+    <color name="place_holder">#C2C2C2</color>
+    <color name="unselected_tabs">#9e9e9e</color>
+    <color name="unselected_tabs_indicator">#eeeeee</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="login_bg">#f2f2f2</color>
+    <color name="card_bg">#ffffff</color>
+    <color name="github_bg">#24292f</color>
+    <color name="second_btn_bg">#fee9eb</color>
+    <color name="second_btn_text">#E21221</color>
+    <color name="color_off_toggle">#EEEEEE</color>
+</resources>

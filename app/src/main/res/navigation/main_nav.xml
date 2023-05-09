@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.moviesapp.presentation.ui.auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.moviesapp.presentation.ui.auth.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.moviesapp.presentation.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.moviesapp.presentation.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_welcomeFragment2"
+            app:destination="@id/welcomeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.moviesapp.presentation.ui.splash.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.moviesapp.presentation.ui.favorites.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.moviesapp.presentation.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_logoutBottomFragment"
+            app:destination="@id/logoutBottomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieListFragment"
+        android:name="com.example.moviesapp.presentation.ui.movieList.MovieListFragment"
+        android:label="fragment_movie_list"
+        tools:layout="@layout/fragment_movie_list">
+        <argument
+            android:name="movieType"
+            app:argType="com.example.moviesapp.domain.model.MovieModel" />
+    </fragment>
+    <dialog
+        android:id="@+id/logoutBottomFragment"
+        android:name="com.example.moviesapp.presentation.ui.profile.LogoutBottomFragment"
+        android:label="fragment_logout_bottom"
+        tools:layout="@layout/fragment_logout_bottom">
+        <action
+            android:id="@+id/action_logoutBottomFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/main_nav"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.example.moviesapp.presentation.ui.explore.ExploreFragment"
+        android:label="fragment_explore"
+        tools:layout="@layout/fragment_explore">
+        <action
+            android:id="@+id/action_exploreFragment_to_filterBottomFragment"
+            app:destination="@id/filterBottomFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/filterBottomFragment"
+        android:name="com.example.moviesapp.presentation.ui.filter.FilterBottomFragment"
+        android:label="fragment_filter_bottom"
+        tools:layout="@layout/fragment_filter_bottom" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.moviesapp.presentation.ui.detail.DetailFragment"
+        android:label="DetailFragment">
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment_to_youtubePlayerFragment"
+            app:destination="@id/youtubePlayerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/youtubePlayerFragment"
+        android:name="com.example.moviesapp.presentation.ui.detail.YoutubePlayerFragment"
+        android:label="fragment_youtube_player"
+        tools:layout="@layout/fragment_youtube_player">
+        <argument
+            android:name="videoId"
+            app:argType="string" />
+    </fragment>
+</navigation>

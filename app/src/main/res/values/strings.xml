@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MoviesApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_title">Login to Your Account</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_checkbox_title">Remember me</string>
+    <string name="login_signin_title">Sign in</string>
+    <string name="login_forgot_pass">Forgot the password?</string>
+    <string name="login_or_text">or continue with</string>
+    <string name="login_is_account_text">Don\'t have an account?</string>
+    <string name="login_signup_text">Sign up</string>
+    <string name="register_title_text">Create Your Account</string>
+    <string name="register_dont_have_text">Don\'t have an account?</string>
+    <string name="welcome_title_text">Welcome to MovieApp</string>
+    <string name="welcome_about_text">The best movie streaming app of the century to make your days great!</string>
+    <string name="welcome_button_text">Get Started</string>
+</resources>
