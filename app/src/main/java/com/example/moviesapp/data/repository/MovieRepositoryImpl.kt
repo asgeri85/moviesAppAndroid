@@ -3,11 +3,13 @@ package com.example.moviesapp.data.repository
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.example.moviesapp.common.NetworkResponseState
+import com.example.moviesapp.data.dto.local.FavoritesLocalDTO
 import com.example.moviesapp.data.mapper.toCastingUiModel
 import com.example.moviesapp.data.mapper.toMovieDetailUiModel
 import com.example.moviesapp.data.mapper.toMovieUiModel
 import com.example.moviesapp.data.mapper.toReviewsUiModel
 import com.example.moviesapp.data.mapper.toTrailerUiModel
+import com.example.moviesapp.data.source.local.LocalDataSource
 import com.example.moviesapp.data.source.remote.RemoteDataSource
 import com.example.moviesapp.domain.model.CastingUiModel
 import com.example.moviesapp.domain.model.MovieDetailUiModel
@@ -23,7 +25,8 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource
 ) : MovieRepository {
 
     override suspend fun getNowPlaying(): Flow<NetworkResponseState<List<MovieUiModel>>> = flow {
@@ -116,6 +119,20 @@ class MovieRepositoryImpl @Inject constructor(
             emit(NetworkResponseState.Loading)
             when (val response = remoteDataSource.getMovieRecommendations(id)) {
                 is NetworkResponseState.Success -> emit(NetworkResponseState.Success(response.result?.results?.toMovieUiModel()))
+                is NetworkResponseState.Error -> emit(NetworkResponseState.Error(response.exception))
+                else -> {}
+            }
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun addFavorites(favoritesLocalDTO: FavoritesLocalDTO) {
+        localDataSource.addFavorites(favoritesLocalDTO)
+    }
+
+    override suspend fun getFavorites(): Flow<NetworkResponseState<List<FavoritesLocalDTO>>> =
+        flow {
+            emit(NetworkResponseState.Loading)
+            when (val response = localDataSource.getFavorites()) {
+                is NetworkResponseState.Success -> emit(NetworkResponseState.Success(response.result))
                 is NetworkResponseState.Error -> emit(NetworkResponseState.Error(response.exception))
                 else -> {}
             }

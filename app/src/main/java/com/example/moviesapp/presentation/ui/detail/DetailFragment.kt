@@ -2,8 +2,8 @@ package com.example.moviesapp.presentation.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -12,7 +12,9 @@ import com.example.moviesapp.common.delegate.viewBinding
 import com.example.moviesapp.common.utils.gone
 import com.example.moviesapp.common.utils.showToast
 import com.example.moviesapp.common.utils.visible
+import com.example.moviesapp.data.dto.local.FavoritesLocalDTO
 import com.example.moviesapp.databinding.FragmentDetailBinding
+import com.example.moviesapp.domain.model.MovieDetailUiModel
 import com.example.moviesapp.presentation.ui.detail.adapters.CastAdapter
 import com.example.moviesapp.presentation.ui.detail.adapters.GenreAdapter
 import com.example.moviesapp.presentation.ui.detail.adapters.ViewPagerAdapter
@@ -28,7 +30,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val args: DetailFragmentArgs by navArgs()
     private val genreAdapter = GenreAdapter()
     private val castingAdapter = CastAdapter()
-    private var title: String = ""
+    private lateinit var movie: MovieDetailUiModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,6 +44,17 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         binding.imageButton3.setOnClickListener {
             shareMovie()
         }
+
+        binding.imageButton2.setOnClickListener {
+            viewModel.addFavoritesMovie(
+                FavoritesLocalDTO(
+                    movie.id,
+                    movie.title,
+                    movie.posterImage,
+                    movie.rateFormat().toDouble()
+                )
+            )
+        }
     }
 
     private fun observeState() {
@@ -50,7 +63,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 is DetailUiState.SuccessDetailMovie -> {
                     binding.detailItem = it.data
                     genreAdapter.differ.submitList(it.data.genres)
-                    title = it.data.title.toString()
+                    movie = it.data
                 }
 
                 is DetailUiState.SuccessDetailCasting -> {
@@ -102,7 +115,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private fun shareMovie() {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, title)
+            putExtra(Intent.EXTRA_TEXT, movie.title)
             type = "text/plain"
         }
 

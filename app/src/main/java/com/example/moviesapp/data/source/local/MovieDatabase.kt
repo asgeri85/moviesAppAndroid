@@ -2,10 +2,10 @@ package com.example.moviesapp.data.source.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.moviesapp.data.dto.FavoritesDTO
+import com.example.moviesapp.data.dto.local.FavoritesLocalDTO
 
 @Database(
-    entities = [FavoritesDTO::class],
+    entities = [FavoritesLocalDTO::class],
     version = 1,
     exportSchema = false
 )

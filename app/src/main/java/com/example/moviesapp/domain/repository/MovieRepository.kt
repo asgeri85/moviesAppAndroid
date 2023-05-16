@@ -2,7 +2,7 @@ package com.example.moviesapp.domain.repository
 
 import androidx.paging.PagingData
 import com.example.moviesapp.common.NetworkResponseState
-import com.example.moviesapp.data.dto.MovieResponseDTO
+import com.example.moviesapp.data.dto.local.FavoritesLocalDTO
 import com.example.moviesapp.domain.model.CastingUiModel
 import com.example.moviesapp.domain.model.MovieDetailUiModel
 import com.example.moviesapp.domain.model.MovieUiModel
@@ -29,4 +29,8 @@ interface MovieRepository {
     suspend fun getMovieReviews(id: Int): Flow<NetworkResponseState<List<ReviewUiModel>>>
 
     suspend fun getMovieRecommendations(id: Int): Flow<NetworkResponseState<List<MovieUiModel>>>
+
+    suspend fun addFavorites(favoritesLocalDTO: FavoritesLocalDTO)
+
+    suspend fun getFavorites(): Flow<NetworkResponseState<List<FavoritesLocalDTO>>>
 }

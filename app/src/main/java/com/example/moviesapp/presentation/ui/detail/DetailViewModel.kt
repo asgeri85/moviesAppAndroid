@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviesapp.common.NetworkResponseState
+import com.example.moviesapp.data.dto.local.FavoritesLocalDTO
+import com.example.moviesapp.domain.useCase.AddFavoritesUseCase
 import com.example.moviesapp.domain.useCase.GetCastingUseCase
 import com.example.moviesapp.domain.useCase.GetMovieDetailUseCase
 import com.example.moviesapp.domain.useCase.GetMovieReviewsUseCase
@@ -22,7 +24,8 @@ class DetailViewModel @Inject constructor(
     private val getCastingUseCase: GetCastingUseCase,
     private val getTrailerMovieUseCase: GetTrailerMovieUseCase,
     private val getMovieReviewsUseCase: GetMovieReviewsUseCase,
-    private val getRecommendationsUseCase: GetRecommendationsUseCase
+    private val getRecommendationsUseCase: GetRecommendationsUseCase,
+    private val addFavoritesUseCase: AddFavoritesUseCase
 ) : ViewModel() {
 
     private val _detailUiState = MutableLiveData<DetailUiState>()
@@ -137,6 +140,12 @@ class DetailViewModel @Inject constructor(
                     )
                 }
             }
+        }
+    }
+
+    fun addFavoritesMovie(favoritesLocalDTO: FavoritesLocalDTO) {
+        viewModelScope.launch {
+            addFavoritesUseCase(favoritesLocalDTO)
         }
     }
 
